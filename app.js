@@ -34,8 +34,8 @@ async function createCards() {
             <div class="card">
                 <img src="${p.image}" alt="${p.title}">
                 <h3>${p.title}</h3>
-                <p>${p.description}</p>
-                <p>$${p.price.toFixed(2)}</p>
+              <p class="description">${p.description}</p>
+              <p class="price">$${p.price.toFixed(2)}</p>
             </div>
         `);
 

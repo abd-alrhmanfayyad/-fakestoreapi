@@ -1,3 +1,4 @@
+/* ===== Basics ===== */
 * {
     margin: 0;
     padding: 0;
@@ -13,26 +14,44 @@ body {
     flex-direction: column;
 }
 
-/* Header */
+main {
+    flex: 1;
+}
+
+/* ===== Header ===== */
 header {
     background-color: #ff7900;
     color: white;
     padding: 20px;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
 }
 
-/* Cards layout */
-#products {
-    flex: 1;
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    margin-left: 15px;
+}
+
+/* ===== Footer ===== */
+footer {
+    background-color: #222;
+    color: white;
+    text-align: center;
+    padding: 15px;
+}
+
+/* ===== Cards (products and posts) ===== */
+#products,
+#posts {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 20px;
     padding: 30px;
 }
 
-/* One card */
 .card {
     background-color: white;
     border-radius: 10px;
@@ -43,38 +62,79 @@ header {
     gap: 10px;
 }
 
+.card h3 {
+    font-size: 16px;
+}
+
+/* ===== Product card ===== */
 .card img {
     width: 100%;
     height: 200px;
     object-fit: contain;
 }
 
-.card h3 {
-    font-size: 16px;
-}
-
-/* Description: show 3 lines only */
-.card p:first-of-type {
+.description {
     font-size: 14px;
     color: #666;
     display: -webkit-box;
     -webkit-line-clamp: 3;
+    line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
 
-/* Price: the last p, pushed to the bottom */
-.card p:last-of-type {
+.price {
     margin-top: auto;
     font-size: 18px;
     font-weight: bold;
     color: #ff7900;
 }
 
-/* Footer */
-footer {
-    background-color: #222;
+/* ===== Post card ===== */
+.card p {
+    color: #444;
+}
+
+/* ===== Form ===== */
+#post-form {
+    max-width: 500px;
+    margin: 30px auto 0;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+#post-form input,
+#post-form textarea {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-family: inherit;
+}
+
+/* ===== Buttons ===== */
+button {
+    padding: 8px 14px;
+    border: none;
+    border-radius: 5px;
+    background-color: #ff7900;
     color: white;
-    text-align: center;
-    padding: 15px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover {
+    opacity: 0.85;
+}
+
+.delete-btn {
+    background-color: #d93025;
+}
+
+#post-form textarea {
+    resize: none;
 }
