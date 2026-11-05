@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fake Store - Posts</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="posts.js" defer></script>
+</head>
+<body>
+    <header>
+        <h1>Fake Store</h1>
+        <nav>
+            <a href="index.html">Products</a>
+            <a href="posts.html">Posts</a>
+        </nav>
+    </header>
+
+    <main>
+        <form id="post-form">
+            <label for="title">Title</label>
+            <input type="text" id="title" required>
+
+            <label for="content">Content</label>
+            <textarea id="content" rows="4" required></textarea>
+
+            <button type="submit">Post</button>
+        </form>
+
+        <div id="posts"></div>
