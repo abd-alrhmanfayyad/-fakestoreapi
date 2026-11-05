@@ -24,7 +24,7 @@ postForm.addEventListener("submit", async (e) => {
 
 async function loadNewPosts() {
     const res = await fetch(DB_URL + "/posts.json");
-   
+
 
 
 
@@ -37,8 +37,8 @@ async function loadNewPosts() {
         console.log("Failed: " + res.status);
         return;
     }
-    
-     const posts = Object.entries(await res.json() || {});
+
+    const posts = Object.entries(await res.json() || {});
     const cards = posts.map(function ([id, post]) {
 
 
@@ -46,6 +46,7 @@ async function loadNewPosts() {
     <div class="card" data-id="${id}">
         <h3>${post.title}</h3>
         <p>${post.content}</p>
+        <button class="delete-btn">Delete</button>
     </div>
 `;
 
@@ -58,3 +59,18 @@ async function loadNewPosts() {
 
 }
 loadNewPosts()
+
+const postsContainer = document.getElementById("posts");
+
+postsContainer.addEventListener("click", async (e) => {
+    const btn = e.target;
+    if (!btn.classList.contains("delete-btn")) return;
+    const id = btn.closest(".card").dataset.id;
+
+    const delres = await fetch(`${DB_URL}/posts/${id}.json`, { method: "DELETE" });
+
+    if (delres.ok) {
+        loadNewPosts()
+    }
+
+});
