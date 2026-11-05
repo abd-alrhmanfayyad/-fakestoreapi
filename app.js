@@ -8,6 +8,8 @@ class Product {
 }
 
 const products = [];
+const DB_URL = "https://orange-api-task-default-rtdb.europe-west1.firebasedatabase.app";
+
 
 async function getProducts() {
     const response = await fetch("https://fakestoreapi.com/products");
@@ -24,11 +26,32 @@ async function getProducts() {
     });
 }
 
+
+
+async function getPosts() {
+    const response = await fetch(DB_URL + "/posts.json");
+
+    if (!response.ok) {
+        throw new Error("Request failed: " + response.status);
+    }
+
+    const data = await response.json();
+
+  Object.values(data || {}).forEach(d => {
+        const p = new Product(d.title, Number(d.price), d.content, d.image);
+        products.push(p);
+    });
+}
+
+
+
+
 async function createCards() {
     const container = document.getElementById("products");
 
     try {
         await getProducts();
+        await getPosts();
 
         const cards = products.map(p => `
             <div class="card">

@@ -10,8 +10,12 @@ postForm.addEventListener("submit", async (e) => {
 
 
     const title = document.getElementById("title").value.trim();
+    const image = document.getElementById("image").value.trim();
+
     const content = document.getElementById("content").value.trim();
-    const newPost = { title, content };
+    const price = document.getElementById("price").value.trim();
+
+    const newPost = { title, content, image, price };
 
 
     if (editingId === null) {
@@ -61,8 +65,11 @@ async function loadNewPosts() {
 
         return `
     <div class="card" data-id="${id}">
+    <img src="${post.image}" alt="${post.title}">
         <h3>${post.title}</h3>
         <p>${post.content}</p>
+         <p class="price">$${Number(post.price).toFixed(2)}</p>
+
         <button class="delete-btn">Delete</button>
          <button class="edit-btn">Edit</button>
     </div>
@@ -91,20 +98,23 @@ postsContainer.addEventListener("click", async (e) => {
         const delres = await fetch(`${DB_URL}/posts/${id}.json`, { method: "DELETE" });
 
         if (delres.ok) {
-           if (id === editingId) {
-            editingId = null;
-            postForm.reset();
-            submitBtn.textContent = "Post";
+            if (id === editingId) {
+                editingId = null;
+                postForm.reset();
+                submitBtn.textContent = "Post";
+            }
+            loadNewPosts();
         }
-         loadNewPosts();
-    }}
+    }
     else {
         editingId = id;
         const res = await fetch(DB_URL + `/posts/${id}.json`);
         const data = await res.json();
         submitBtn.textContent = "Update";
         document.getElementById("title").value = data.title;
+        document.getElementById("image").value = data.image;
         document.getElementById("content").value = data.content;
+        document.getElementById("price").value = data.price;
 
     }
 

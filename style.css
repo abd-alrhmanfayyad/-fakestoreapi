@@ -83,13 +83,12 @@ footer {
     overflow: hidden;
 }
 
-.price {
+.card .price {
     margin-top: auto;
     font-size: 18px;
     font-weight: bold;
     color: #ff7900;
 }
-
 /* ===== Post card ===== */
 .card p {
     color: #444;
